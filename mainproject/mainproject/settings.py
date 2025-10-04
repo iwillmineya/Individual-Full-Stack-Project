@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mainproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates/index.html")],
+        'DIRS': [os.path.join(BASE_DIR, "gameyaptemplates/index.html")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
