@@ -124,5 +124,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "gameyap/static")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-'whitenoise.middleware.WhiteNoiseMiddleware',
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
