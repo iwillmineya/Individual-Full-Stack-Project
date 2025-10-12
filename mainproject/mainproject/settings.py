@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os;
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-kd6(gjte1@he6)w@#*8a9pv0pl9#9qd6u8cr=a5%9a03#63t5^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gameyapp-82d05d711186.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -74,10 +76,9 @@ WSGI_APPLICATION = 'mainproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://neondb_owner:npg_D8Yh4wavAtLX@ep-crimson-shadow-ag5ch5h5.c-2.eu-central-1.aws.neon.tech/hedge_ruby_cloud_604805'
+    )
 }
 
 
