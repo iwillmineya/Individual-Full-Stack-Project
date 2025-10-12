@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class GameyapConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'gameyap'
+    name = 'mainproject.gameyap'
