@@ -24,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-kd6(gjte1@he6)w@#*8a9pv0pl9#9qd6u8cr=a5%9a03#63t5^'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['gameyapp-82d05d711186.herokuapp.com', 'localhost', '127.0.0.1']
 
