@@ -76,18 +76,10 @@
                                   <span>{{ game.description }}</span>
                               </p>
                               <div class="mt-auto">
-                                <div class="d-flex flex-column align-items-center gap-2">
-                                  <button type="button" class="btn btn-success btn-sm px-3 like-btn" data-game-id="{{ game.pk }}">
-                                    <i class="bi bi-hand-thumbs-up-fill"></i> Like <span class="badge bg-light text-success" id="like-count-{{ game.pk }}">{{ game.likes }}</span>
-                                  </button>
-                                  <button type="button" class="btn btn-danger btn-sm px-3 dislike-btn" data-game-id="{{ game.pk }}">
-                                    <i class="bi bi-hand-thumbs-down-fill"></i> Dislike <span class="badge bg-light text-danger" id="dislike-count-{{ game.pk }}">{{ game.dislikes }}</span>
-                                  </button>
-                                  {% if user.is_authenticated %}
-                                    <a href="{% url 'game_update' game.pk %}" class="btn btn-outline-warning me-2 mb-2" aria-label="Edit {{ game.title }}">Edit</a>
-                                    <a href="{% url 'game_delete' game.pk %}" class="btn btn-outline-danger mb-2" aria-label="Delete {{ game.title }}">Delete</a>
-                                  {% endif %}
-                                </div>
+                                {% if user.is_authenticated %}
+                                  <a href="{% url 'game_update' game.pk %}" class="btn btn-outline-warning me-2 mb-2" aria-label="Edit {{ game.title }}">Edit</a>
+                                  <a href="{% url 'game_delete' game.pk %}" class="btn btn-outline-danger mb-2" aria-label="Delete {{ game.title }}">Delete</a>
+                                {% endif %}
                               </div>
                           </div>
                       </div>
@@ -184,60 +176,6 @@
     color: #fff;
   }
   </style>
-
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    function getCookie(name) {
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-            break;
-          }
-        }
-      }
-      return cookieValue;
-    }
-
-    document.querySelectorAll('.like-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const gameId = btn.getAttribute('data-game-id');
-        fetch(`/like/${gameId}/`, {
-          method: 'POST',
-          headers: {
-            'X-CSRFToken': getCookie('csrftoken'),
-            'X-Requested-With': 'XMLHttpRequest',
-          },
-        })
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById(`like-count-${gameId}`).textContent = data.likes;
-          document.getElementById(`dislike-count-${gameId}`).textContent = data.dislikes;
-        });
-      });
-    });
-    document.querySelectorAll('.dislike-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const gameId = btn.getAttribute('data-game-id');
-        fetch(`/dislike/${gameId}/`, {
-          method: 'POST',
-          headers: {
-            'X-CSRFToken': getCookie('csrftoken'),
-            'X-Requested-With': 'XMLHttpRequest',
-          },
-        })
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById(`like-count-${gameId}`).textContent = data.likes;
-          document.getElementById(`dislike-count-${gameId}`).textContent = data.dislikes;
-        });
-      });
-    });
-  });
-  </script>
 </style>
 
 {% endblock %}
