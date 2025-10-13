@@ -7,8 +7,12 @@ from .forms import GameForm
 
 def home(request):
     games = Game.objects.all()
-    leaderboard_ow = list(range(1, 11))  # Use 1-10 for demo, change to 501 for full
-    leaderboard_val = list(range(1, 11))
+    leaderboard_ow = [
+        "Proper", "Smurf", "Fleta", "Lip", "Fearless", "Hanbin", "ChoiSehwan", "Shu", "Viol2t", "Leave"
+    ]
+    leaderboard_val = [
+        "Derke", "TenZ", "Sacy", "aspas", "Leo", "Boaster", "Less", "MaKo", "Zyppan", "cNed"
+    ]
     return render(request, "index.html", {
         "games": games,
         "leaderboard_ow": leaderboard_ow,

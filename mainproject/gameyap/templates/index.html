@@ -8,8 +8,8 @@
       <div class="leaderboard p-3 mb-4 bg-white shadow rounded" style="min-height: 80vh;">
         <h4 class="text-center text-primary mb-3">Top 500 Overwatch</h4>
         <ol class="leaderboard-list" style="height: 70vh; overflow-y: auto; font-size: 0.95rem;">
-          {% for i in leaderboard_ow %}
-            <li class="mb-1">#{{ i }} PlayerOW{{ i }}</li>
+          {% for player in leaderboard_ow %}
+            <li class="mb-1">{{ forloop.counter }}. {{ player }}</li>
           {% endfor %}
         </ol>
       </div>
@@ -63,8 +63,8 @@
       <div class="leaderboard p-3 mb-4 bg-white shadow rounded" style="min-height: 80vh;">
         <h4 class="text-center text-danger mb-3">Top 500 Valorant</h4>
         <ol class="leaderboard-list" style="height: 70vh; overflow-y: auto; font-size: 0.95rem;">
-          {% for i in leaderboard_val %}
-            <li class="mb-1">#{{ i }} PlayerVAL{{ i }}</li>
+          {% for player in leaderboard_val %}
+            <li class="mb-1">{{ forloop.counter }}. {{ player }}</li>
           {% endfor %}
         </ol>
       </div>
