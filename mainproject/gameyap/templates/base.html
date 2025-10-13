@@ -13,7 +13,23 @@
                 min-height: 100vh;
                 background-size: auto, cover;
                 background-repeat: repeat, no-repeat;
+                    color: #e0e3f3;
             }
+                .alt-page-heading {
+                    color: #e0e3f3 !important;
+                    text-shadow: 0 2px 8px rgba(37,117,252,0.15);
+                }
+                #main-content {
+                    overflow: visible !important;
+                }
+                /* Hide scrollbars for all elements except the browser window */
+                ::-webkit-scrollbar {
+                    width: 0px;
+                    background: transparent;
+                }
+                html {
+                    scrollbar-width: none;
+                }
         </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
