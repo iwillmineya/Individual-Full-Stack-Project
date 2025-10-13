@@ -1,0 +1,22 @@
+/* Simple styles for the media player in the navbar */
+.media-player {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(30, 32, 44, 0.85);
+  border-radius: 1.5rem;
+  padding: 0.25rem 0.75rem;
+}
+.media-player audio {
+  display: none;
+}
+.media-player .btn {
+  font-size: 1.2rem;
+  padding: 0.25rem 0.5rem;
+}
+.media-player .track-title {
+  color: #e0e3f3;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+}

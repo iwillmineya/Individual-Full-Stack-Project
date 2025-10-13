@@ -6,13 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameYap</title>
     <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/css/media-player.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Main navigation">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">GameYap</a>
+                                <a class="navbar-brand" href="{% url 'home' %}">GameYap</a>
+                                <div class="media-player ms-3">
+                                    <span class="track-title">Lofi Chill Beats</span>
+                                    <button class="btn btn-outline-light btn-sm" id="play-btn" title="Play" type="button">
+                                        <span id="play-icon">&#9658;</span>
+                                    </button>
+                                    <button class="btn btn-outline-light btn-sm" id="pause-btn" title="Pause" type="button" style="display:none;">
+                                        <span id="pause-icon">&#10073;&#10073;</span>
+                                    </button>
+                                    <audio id="bg-audio" loop>
+                                        <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b6c1b2b7.mp3" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -38,5 +52,27 @@
         <small>&copy; {{ now|date:'Y' }} GameYap. All rights reserved.</small>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+    // Simple media player logic
+    const audio = document.getElementById('bg-audio');
+    const playBtn = document.getElementById('play-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    playBtn.addEventListener('click', function() {
+        audio.volume = 0.25;
+        audio.play();
+        playBtn.style.display = 'none';
+        pauseBtn.style.display = 'inline-block';
+    });
+    pauseBtn.addEventListener('click', function() {
+        audio.pause();
+        pauseBtn.style.display = 'none';
+        playBtn.style.display = 'inline-block';
+    });
+    // Optionally auto-play for logged-in users
+    // window.addEventListener('DOMContentLoaded', () => {
+    //   if (audio && playBtn) playBtn.click();
+    // });
+</script>
 </body>
 </html>
