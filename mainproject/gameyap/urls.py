@@ -9,4 +9,6 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
+    path('like/<int:pk>/', views.game_like, name='game_like'),
+    path('dislike/<int:pk>/', views.game_dislike, name='game_dislike'),
 ]

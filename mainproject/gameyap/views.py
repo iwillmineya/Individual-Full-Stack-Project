@@ -77,3 +77,22 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect("home")
+
+
+from django.views.decorators.http import require_POST
+
+@login_required
+@require_POST
+def game_like(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    game.likes += 1
+    game.save()
+    return redirect("home")
+
+@login_required
+@require_POST
+def game_dislike(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    game.dislikes += 1
+    game.save()
+    return redirect("home")
