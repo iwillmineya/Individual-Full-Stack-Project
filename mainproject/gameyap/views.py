@@ -7,7 +7,13 @@ from .forms import GameForm
 
 def home(request):
     games = Game.objects.all()
-    return render(request, "index.html", {"games": games})
+    leaderboard_ow = list(range(1, 11))  # Use 1-10 for demo, change to 501 for full
+    leaderboard_val = list(range(1, 11))
+    return render(request, "index.html", {
+        "games": games,
+        "leaderboard_ow": leaderboard_ow,
+        "leaderboard_val": leaderboard_val,
+    })
 
 @login_required
 def game_create(request):
