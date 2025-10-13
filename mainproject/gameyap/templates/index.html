@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid gamer-bg">
   <div class="row">
     <!-- Left Leaderboard -->
     <aside class="col-lg-2 d-none d-lg-block">
@@ -90,25 +90,64 @@
 </div>
 
 <style>
-    .game-card:hover, .game-card:focus {
-        transform: translateY(-8px) scale(1.03);
-        box-shadow: 0 8px 32px rgba(106,17,203,0.15), 0 1.5px 6px rgba(37,117,252,0.12);
-        outline: none;
-    }
-    .hero-section {
-        box-shadow: 0 4px 24px rgba(37,117,252,0.12);
-    }
-    .leaderboard {
-        background: linear-gradient(135deg, #f8fafc 0%, #e3e6f3 100%);
-        border-left: 6px solid #6a11cb;
-        border-right: 6px solid #2575fc;
-        max-height: 90vh;
-    }
-    .leaderboard-list {
-        list-style: decimal inside;
-        padding-left: 0;
-        margin-bottom: 0;
-    }
+  body, .gamer-bg {
+    background: linear-gradient(135deg, #181824 0%, #23243a 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  .gamer-bg::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(120deg, rgba(106,17,203,0.12) 0%, rgba(37,117,252,0.12) 100%);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .container-fluid, .row, .leaderboard, .hero-section, main {
+    position: relative;
+    z-index: 1;
+  }
+  .game-card:hover, .game-card:focus {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(106,17,203,0.15), 0 1.5px 6px rgba(37,117,252,0.12);
+    outline: none;
+  }
+  .hero-section {
+    box-shadow: 0 4px 24px rgba(37,117,252,0.12);
+  }
+  .leaderboard {
+    background: linear-gradient(135deg, #23243a 0%, #181824 100%);
+    border-left: 6px solid #6a11cb;
+    border-right: 6px solid #2575fc;
+    max-height: 90vh;
+    color: #e0e3f3;
+  }
+  .leaderboard-list {
+    list-style: decimal inside;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .text-primary, .text-danger, .text-secondary {
+    text-shadow: 0 2px 8px rgba(37,117,252,0.15);
+  }
+  .card {
+    background: linear-gradient(120deg, #23243a 0%, #181824 100%);
+    color: #e0e3f3;
+    border: none;
+  }
+  .card-title {
+    color: #6a11cb;
+  }
+  .badge.bg-info {
+    background: #2575fc;
+    color: #fff;
+  }
+  .badge.bg-secondary {
+    background: #181824;
+    color: #fff;
+  }
 </style>
 
 {% endblock %}
