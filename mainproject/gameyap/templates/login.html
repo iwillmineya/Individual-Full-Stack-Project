@@ -1,10 +1,13 @@
+
 {% extends "base.html" %}
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
+<section aria-labelledby="login-heading">
+  <h2 id="login-heading">Login</h2>
+  <form method="post" aria-describedby="login-heading">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary" aria-label="Login">Login</button>
   </form>
-  <a href="{% url 'register' %}">Don't have an account? Register</a>
+  <a href="{% url 'register' %}" class="btn btn-link" aria-label="Go to registration">Don't have an account? Register</a>
+</section>
 {% endblock %}

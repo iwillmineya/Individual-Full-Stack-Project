@@ -1,10 +1,13 @@
+
 {% extends "base.html" %}
 {% block content %}
-  <h2>Delete Game</h2>
+<section aria-labelledby="delete-game-heading">
+  <h2 id="delete-game-heading">Delete Game</h2>
   <p>Are you sure you want to delete "{{ game.title }}"?</p>
-  <form method="post">
+  <form method="post" aria-describedby="delete-game-heading">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="{% url 'home' %}">Cancel</a>
+    <button type="submit" class="btn btn-danger" aria-label="Confirm delete">Delete</button>
+    <a href="{% url 'home' %}" class="btn btn-link" aria-label="Cancel and go back">Cancel</a>
   </form>
+</section>
 {% endblock %}

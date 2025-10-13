@@ -1,10 +1,13 @@
+
 {% extends "base.html" %}
 {% block content %}
-  <h2>{{ form.instance.pk|yesno:"Edit Game,Create Game" }}</h2>
-  <form method="post">
+<section aria-labelledby="game-form-heading">
+  <h2 id="game-form-heading">{{ form.instance.pk|yesno:"Edit Game,Create Game" }}</h2>
+  <form method="post" aria-describedby="game-form-heading">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary" aria-label="Save game">Save</button>
   </form>
-  <a href="{% url 'home' %}">Back to Home</a>
+  <a href="{% url 'home' %}" class="btn btn-link" aria-label="Back to Home">Back to Home</a>
+</section>
 {% endblock %}

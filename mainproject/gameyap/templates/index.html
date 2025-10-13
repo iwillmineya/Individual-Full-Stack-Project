@@ -1,22 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Game List</h2>
-    <div class="row">
+<section aria-labelledby="game-list-heading">
+    <h2 id="game-list-heading">Game List</h2>
+    <div class="row" role="list">
         {% for game in games %}
-            <div class="col-md-4">
-                <div class="card mb-4">
+            <article class="col-md-4" role="listitem">
+                <div class="card mb-4 h-100" tabindex="0" aria-label="{{ game.title }} game card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ game.title }}</h5>
-                        <p class="card-text">Genre: {{ game.genre }}<br>Release Date: {{ game.release_date }}<br>{{ game.description }}</p>
+                        <h3 class="card-title">{{ game.title }}</h3>
+                        <p class="card-text">
+                            <span><strong>Genre:</strong> {{ game.genre }}</span><br>
+                            <span><strong>Release Date:</strong> {{ game.release_date }}</span><br>
+                            <span>{{ game.description }}</span>
+                        </p>
                         {% if user.is_authenticated %}
-                            <a href="{% url 'game_update' game.pk %}" class="btn btn-warning">Edit</a>
-                            <a href="{% url 'game_delete' game.pk %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'game_update' game.pk %}" class="btn btn-warning me-2" aria-label="Edit {{ game.title }}">Edit</a>
+                            <a href="{% url 'game_delete' game.pk %}" class="btn btn-danger" aria-label="Delete {{ game.title }}">Delete</a>
                         {% endif %}
                     </div>
                 </div>
-            </div>
+            </article>
         {% empty %}
             <p>No games found.</p>
         {% endfor %}
     </div>
+</section>
 {% endblock %}
