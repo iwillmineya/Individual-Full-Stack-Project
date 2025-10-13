@@ -1,3 +1,25 @@
+  <!-- Search and Filter Form -->
+  <form method="get" action="" class="mb-4">
+  <div class="row">
+    <div class="col-md-4 mb-2">
+      <input type="text" name="search" class="form-control" placeholder="Search games..." value="{{ search_query }}">
+    </div>
+    <div class="col-md-3 mb-2">
+      <select name="genre" class="form-control">
+        <option value="">All Genres</option>
+        {% for genre in genres %}
+          <option value="{{ genre }}" {% if genre == genre_query %}selected{% endif %}>{{ genre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3 mb-2">
+      <input type="date" name="release_date" class="form-control" value="{{ release_query }}">
+    </div>
+    <div class="col-md-2 mb-2">
+      <button type="submit" class="btn btn-primary w-100">Search</button>
+    </div>
+  </div>
+  </form>
 {% extends "base.html" %}
 {% block content %}
 

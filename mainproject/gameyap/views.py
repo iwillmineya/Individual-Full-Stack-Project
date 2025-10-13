@@ -23,7 +23,17 @@ def profile_edit(request):
     return render(request, "profile_edit.html", {"form": form})
 
 def home(request):
+    search_query = request.GET.get('search', '')
+    genre_query = request.GET.get('genre', '')
+    release_query = request.GET.get('release_date', '')
     games = Game.objects.all()
+    if search_query:
+        games = games.filter(title__icontains=search_query)
+    if genre_query:
+        games = games.filter(genre=genre_query)
+    if release_query:
+        games = games.filter(release_date=release_query)
+    genres = Game.objects.values_list('genre', flat=True).distinct()
     leaderboard_ow = [
         "Proper", "Smurf", "Fleta", "Lip", "Fearless", "Hanbin", "ChoiSehwan", "Shu", "Viol2t", "Leave"
     ]
@@ -32,6 +42,10 @@ def home(request):
     ]
     context = {
         'games': games,
+        'genres': genres,
+        'search_query': search_query,
+        'genre_query': genre_query,
+        'release_query': release_query,
         'leaderboard_ow': leaderboard_ow,
         'leaderboard_val': leaderboard_val,
     }
