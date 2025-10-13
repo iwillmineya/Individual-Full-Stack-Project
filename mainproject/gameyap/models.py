@@ -8,6 +8,7 @@ class Game(models.Model):
     description = models.TextField(blank=True)
     likes = models.PositiveIntegerField(default=0)
     dislikes = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

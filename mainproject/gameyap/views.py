@@ -26,7 +26,7 @@ def home(request):
     search_query = request.GET.get('search', '')
     genre_query = request.GET.get('genre', '')
     release_query = request.GET.get('release_date', '')
-    games = Game.objects.all()
+        games = Game.objects.filter(is_active=True)
     if search_query:
         games = games.filter(title__icontains=search_query)
     if genre_query:
@@ -78,7 +78,8 @@ def game_update(request, pk):
 def game_delete(request, pk):
     game = get_object_or_404(Game, pk=pk)
     if request.method == "POST":
-        game.delete()
+        game.is_active = False
+        game.save()
         return redirect("home")
     return render(request, "game_confirm_delete.html", {"game": game})
 
