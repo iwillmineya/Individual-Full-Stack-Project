@@ -2,6 +2,29 @@
 {% block content %}
 
 <div class="container-fluid gamer-bg">
+  <!-- Search and Filter Form -->
+  <form method="get" class="row g-3 mb-4 align-items-end">
+    <div class="col-md-4">
+      <label for="search" class="form-label">Search by Title</label>
+      <input type="text" name="search" id="search" class="form-control" value="{{ search_query }}" placeholder="Game title...">
+    </div>
+    <div class="col-md-3">
+      <label for="genre" class="form-label">Filter by Genre</label>
+      <select name="genre" id="genre" class="form-select">
+        <option value="">All Genres</option>
+        {% for genre in genres %}
+          <option value="{{ genre }}" {% if genre == genre_query %}selected{% endif %}>{{ genre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="release" class="form-label">Release Date</label>
+      <input type="date" name="release" id="release" class="form-control" value="{{ release_query }}">
+    </div>
+    <div class="col-md-2 d-grid">
+      <button type="submit" class="btn btn-primary">Search & Filter</button>
+    </div>
+  </form>
   <!-- Featured Game Carousel -->
   <div id="featuredGameCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
     <div class="carousel-inner">
