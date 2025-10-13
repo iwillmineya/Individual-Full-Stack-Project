@@ -78,8 +78,7 @@ def game_update(request, pk):
 def game_delete(request, pk):
     game = get_object_or_404(Game, pk=pk)
     if request.method == "POST":
-        if isinstance(game, Game):
-            game.delete()
+        game.delete()
         return redirect("home")
     return render(request, "game_confirm_delete.html", {"game": game})
 
