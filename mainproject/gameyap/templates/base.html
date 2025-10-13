@@ -5,28 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameYap</title>
-    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
-    <link rel="stylesheet" href="{% static '/css/media-player.css' %}">
+        <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static '/css/media-player.css' %}">
+        <style>
+            body.bg-alt {
+                background: linear-gradient(120deg, #23243a 0%, #181824 100%), url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+                min-height: 100vh;
+                background-size: auto, cover;
+                background-repeat: repeat, no-repeat;
+            }
+        </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+        {% if not request.path == '/' %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('bg-alt');
+                });
+            </script>
+        {% endif %}
+        <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Main navigation">
             <div class="container-fluid">
-                                <a class="navbar-brand" href="{% url 'home' %}">GameYap</a>
-                                <div class="media-player ms-3">
-                                                                            <span class="track-title">Lofi Chill Beats</span>
-                                                                            <button class="btn btn-outline-light btn-sm" id="play-btn" title="Play" type="button" style="display:none;">
-                                                                                <span id="play-icon">&#9658;</span>
-                                                                            </button>
-                                                                            <button class="btn btn-outline-light btn-sm" id="pause-btn" title="Pause" type="button">
-                                                                                <span id="pause-icon">&#10073;&#10073;</span>
-                                                                            </button>
-                                                                            <audio id="bg-audio" loop autoplay muted>
-                                                                                <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_128b6b2b7b.mp3" type="audio/mpeg">
-                                                                                Your browser does not support the audio element.
-                                                                            </audio>
-                                </div>
+                                                <a class="navbar-brand" href="{% url 'home' %}">GameYap</a>
+                                                <div class="d-flex flex-grow-1 justify-content-end align-items-center">
+                                                    <div class="media-player me-2">
+                                                        <span class="track-title">Lofi Chill Beats</span>
+                                                        <button class="btn btn-outline-light btn-sm" id="play-btn" title="Play" type="button" style="display:none;">
+                                                            <span id="play-icon">&#9658;</span>
+                                                        </button>
+                                                        <button class="btn btn-outline-light btn-sm" id="pause-btn" title="Pause" type="button">
+                                                            <span id="pause-icon">&#10073;&#10073;</span>
+                                                        </button>
+                                                        <audio id="bg-audio" loop autoplay muted>
+                                                            <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_128b6b2b7b.mp3" type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    </div>
+                                                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
