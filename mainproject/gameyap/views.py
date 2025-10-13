@@ -26,7 +26,7 @@ def home(request):
     search_query = request.GET.get('search', '')
     genre_query = request.GET.get('genre', '')
     release_query = request.GET.get('release_date', '')
-        games = Game.objects.filter(is_active=True)
+    games = Game.objects.filter(is_active=True)
     if search_query:
         games = games.filter(title__icontains=search_query)
     if genre_query:
