@@ -24,33 +24,12 @@ def profile_edit(request):
 
 def home(request):
     games = Game.objects.all()
-    genre_query = request.GET.get('genre', '')
-    search_query = request.GET.get('search', '')
-    release_query = request.GET.get('release', '')
-    if genre_query:
-        games = games.filter(genre__icontains=genre_query)
-    if search_query:
-        games = games.filter(title__icontains=search_query)
-    if release_query:
-        games = games.filter(release_date=release_query)
-    featured_games = Game.objects.order_by('-release_date')[:3]
-    leaderboard_ow = [
-        "Proper", "Smurf", "Fleta", "Lip", "Fearless", "Hanbin", "ChoiSehwan", "Shu", "Viol2t", "Leave"
-    ]
-    leaderboard_val = [
-        "Derke", "TenZ", "Sacy", "aspas", "Leo", "Boaster", "Less", "MaKo", "Zyppan", "cNed"
-    ]
     genres = Game.objects.values_list('genre', flat=True).distinct()
-    return render(request, "index.html", {
-        "games": games,
-        "featured_games": featured_games,
-        "leaderboard_ow": leaderboard_ow,
-        "leaderboard_val": leaderboard_val,
-        "genres": genres,
-        "genre_query": genre_query,
-        "search_query": search_query,
-        "release_query": release_query,
-    })
+    context = {
+        'games': games,
+        'genres': genres,
+    }
+    return render(request, 'index.html', context)
 
 @login_required
 def game_create(request):
