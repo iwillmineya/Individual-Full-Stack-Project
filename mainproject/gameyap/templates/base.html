@@ -15,17 +15,17 @@
             <div class="container-fluid">
                                 <a class="navbar-brand" href="{% url 'home' %}">GameYap</a>
                                 <div class="media-player ms-3">
-                                    <span class="track-title">Lofi Chill Beats</span>
-                                    <button class="btn btn-outline-light btn-sm" id="play-btn" title="Play" type="button">
-                                        <span id="play-icon">&#9658;</span>
-                                    </button>
-                                    <button class="btn btn-outline-light btn-sm" id="pause-btn" title="Pause" type="button" style="display:none;">
-                                        <span id="pause-icon">&#10073;&#10073;</span>
-                                    </button>
-                                    <audio id="bg-audio" loop>
-                                        <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b6c1b2b7.mp3" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
+                                                        <span class="track-title">Lofi Chillhop Radio</span>
+                                                        <button class="btn btn-outline-light btn-sm" id="play-btn" title="Play" type="button" style="display:none;">
+                                                            <span id="play-icon">&#9658;</span>
+                                                        </button>
+                                                        <button class="btn btn-outline-light btn-sm" id="pause-btn" title="Pause" type="button">
+                                                            <span id="pause-icon">&#10073;&#10073;</span>
+                                                        </button>
+                                                        <audio id="bg-audio" loop autoplay>
+                                                            <source src="https://lofi.chillhop.com/stream" type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
                                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -54,25 +54,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-    // Simple media player logic
-    const audio = document.getElementById('bg-audio');
-    const playBtn = document.getElementById('play-btn');
-    const pauseBtn = document.getElementById('pause-btn');
-    playBtn.addEventListener('click', function() {
+        // Media player logic with autoplay
+        const audio = document.getElementById('bg-audio');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
         audio.volume = 0.25;
-        audio.play();
-        playBtn.style.display = 'none';
-        pauseBtn.style.display = 'inline-block';
-    });
-    pauseBtn.addEventListener('click', function() {
-        audio.pause();
-        pauseBtn.style.display = 'none';
-        playBtn.style.display = 'inline-block';
-    });
-    // Optionally auto-play for logged-in users
-    // window.addEventListener('DOMContentLoaded', () => {
-    //   if (audio && playBtn) playBtn.click();
-    // });
+        window.addEventListener('DOMContentLoaded', () => {
+            // Try to autoplay (may be blocked by browser until user interacts)
+            audio.play().catch(() => {
+                playBtn.style.display = 'inline-block';
+                pauseBtn.style.display = 'none';
+            });
+        });
+        playBtn.addEventListener('click', function() {
+            audio.play();
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline-block';
+        });
+        pauseBtn.addEventListener('click', function() {
+            audio.pause();
+            pauseBtn.style.display = 'none';
+            playBtn.style.display = 'inline-block';
+        });
 </script>
 </body>
 </html>
