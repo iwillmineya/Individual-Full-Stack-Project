@@ -1,2 +1,1 @@
 web: gunicorn config.wsgi
-heroku config:set DJANGO_SETTINGS_MODULE=mainproject.settings --app gameyapp
