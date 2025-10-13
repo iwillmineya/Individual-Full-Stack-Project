@@ -2,8 +2,25 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Game
-from .forms import GameForm
+from .models import Game, UserProfile
+from .forms import GameForm, UserProfileForm
+
+@login_required
+def profile_view(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    return render(request, "profile.html", {"profile": profile})
+
+@login_required
+def profile_edit(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect("profile_view")
+    else:
+        form = UserProfileForm(instance=profile)
+    return render(request, "profile_edit.html", {"form": form})
 
 def home(request):
     games = Game.objects.all()
