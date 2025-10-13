@@ -2,6 +2,33 @@
 {% block content %}
 
 <div class="container-fluid gamer-bg">
+  <!-- Featured Game Carousel -->
+  <div id="featuredGameCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for game in featured_games %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 250px;">
+          <div class="card shadow-lg text-center" style="width: 22rem; background: linear-gradient(120deg, #23243a 0%, #181824 100%); color: #e0e3f3; border-radius: 1rem;">
+            <div class="card-body">
+              <h3 class="card-title text-primary fw-bold">{{ game.title }}</h3>
+              <span class="badge bg-info text-dark mb-2"><strong>Genre:</strong> {{ game.genre }}</span><br>
+              <span class="badge bg-secondary mb-2"><strong>Release Date:</strong> {{ game.release_date }}</span><br>
+              <p class="card-text mt-2">{{ game.description|truncatewords:20 }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#featuredGameCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#featuredGameCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
   <div class="row">
     <!-- Left Leaderboard -->
     <aside class="col-lg-2 d-none d-lg-block">

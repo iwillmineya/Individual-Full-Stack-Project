@@ -7,6 +7,7 @@ from .forms import GameForm
 
 def home(request):
     games = Game.objects.all()
+    featured_games = Game.objects.order_by('-release_date')[:3]
     leaderboard_ow = [
         "Proper", "Smurf", "Fleta", "Lip", "Fearless", "Hanbin", "ChoiSehwan", "Shu", "Viol2t", "Leave"
     ]
@@ -15,6 +16,7 @@ def home(request):
     ]
     return render(request, "index.html", {
         "games": games,
+        "featured_games": featured_games,
         "leaderboard_ow": leaderboard_ow,
         "leaderboard_val": leaderboard_val,
     })
