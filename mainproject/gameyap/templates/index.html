@@ -7,19 +7,19 @@
     <aside class="col-lg-2 d-none d-lg-block">
       <div class="leaderboard p-3 mb-4 bg-white shadow rounded" style="min-height: 80vh;">
         <h4 class="text-center text-primary mb-3">Top 10 Overwatch</h4>
-        <ol class="leaderboard-list" style="height: 70vh; overflow-y: auto; font-size: 0.95rem;">
+        <div class="mb-3">
+          <h5 class="text-center text-secondary">Honourable Mention</h5>
+          <ul class="list-unstyled text-center">
+            <li id="ow-honourable-1">appiekitty</li>
+            <li id="ow-honourable-2">Crestedgecko</li>
+            <li id="ow-honourable-3">Fequi</li>
+          </ul>
+        </div>
+        <ol class="leaderboard-list" style="height: 60vh; overflow-y: auto; font-size: 0.95rem;">
           {% for player in leaderboard_ow %}
             <li class="mb-1">{{ forloop.counter }}. {{ player }}</li>
           {% endfor %}
         </ol>
-        <div class="mt-4">
-          <h5 class="text-center text-secondary">Honourable Mention</h5>
-          <ul class="list-unstyled text-center">
-            <li id="ow-honourable">appiekitty</li>
-            <li id="ow-honourable">Crestedgecko</li>
-            <li id="ow-honourable">Fequi</li>
-          </ul>
-        </div>
       </div>
     </aside>
 
@@ -70,19 +70,20 @@
     <aside class="col-lg-2 d-none d-lg-block">
       <div class="leaderboard p-3 mb-4 bg-white shadow rounded" style="min-height: 80vh;">
         <h4 class="text-center text-danger mb-3">Top 10 Valorant</h4>
-        <ol class="leaderboard-list" style="height: 70vh; overflow-y: auto; font-size: 0.95rem;">
+        <div class="mb-3">
+          <h5 class="text-center text-secondary">Honourable Mention</h5>
+          <ul class="list-unstyled text-center">
+            <li id="val-honourable-1">sirraHT#9281</li>
+            <li id="val-honourable-2">REV</li>
+            <li id="val-honourable-3">iwillmineyou#dog</li>
+            <li id="val-honourable-4">Bean#3344</li>
+          </ul>
+        </div>
+        <ol class="leaderboard-list" style="height: 60vh; overflow-y: auto; font-size: 0.95rem;">
           {% for player in leaderboard_val %}
             <li class="mb-1">{{ forloop.counter }}. {{ player }}</li>
           {% endfor %}
         </ol>
-        <div class="mt-4">
-          <h5 class="text-center text-secondary">Honourable Mention</h5>
-          <ul class="list-unstyled text-center">
-            <li id="val-honourable">sirraHT#9281</li>
-            <li id="val-honourable">REV iwillmineyou#dog</li>
-            <li id="val-honourable">Bean#3344</li>
-          </ul>
-        </div>
       </div>
     </aside>
   </div>
