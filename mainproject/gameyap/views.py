@@ -24,10 +24,16 @@ def profile_edit(request):
 
 def home(request):
     games = Game.objects.all()
-    genres = Game.objects.values_list('genre', flat=True).distinct()
+    leaderboard_ow = [
+        "Proper", "Smurf", "Fleta", "Lip", "Fearless", "Hanbin", "ChoiSehwan", "Shu", "Viol2t", "Leave"
+    ]
+    leaderboard_val = [
+        "Derke", "TenZ", "Sacy", "aspas", "Leo", "Boaster", "Less", "MaKo", "Zyppan", "cNed"
+    ]
     context = {
         'games': games,
-        'genres': genres,
+        'leaderboard_ow': leaderboard_ow,
+        'leaderboard_val': leaderboard_val,
     }
     return render(request, 'index.html', context)
 
