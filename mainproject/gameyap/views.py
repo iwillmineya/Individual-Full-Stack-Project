@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Game
+from .models import Game, Vote
 from .forms import GameForm
 
 def home(request):
@@ -79,20 +79,54 @@ def user_logout(request):
     return redirect("home")
 
 
+
 from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+
 
 @login_required
 @require_POST
 def game_like(request, pk):
     game = get_object_or_404(Game, pk=pk)
-    game.likes += 1
-    game.save()
+    vote, created = Vote.objects.get_or_create(user=request.user, game=game)
+    if vote.vote_type == Vote.LIKE:
+        # Remove like
+        vote.delete()
+        game.likes = Vote.objects.filter(game=game, vote_type=Vote.LIKE).count()
+        game.save()
+        status = 'removed'
+    else:
+        # Set like, remove dislike if present
+        vote.vote_type = Vote.LIKE
+        vote.save()
+        game.likes = Vote.objects.filter(game=game, vote_type=Vote.LIKE).count()
+        game.dislikes = Vote.objects.filter(game=game, vote_type=Vote.DISLIKE).count()
+        game.save()
+        status = 'added'
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'likes': game.likes, 'dislikes': game.dislikes, 'status': status})
     return redirect("home")
+
 
 @login_required
 @require_POST
 def game_dislike(request, pk):
     game = get_object_or_404(Game, pk=pk)
-    game.dislikes += 1
-    game.save()
+    vote, created = Vote.objects.get_or_create(user=request.user, game=game)
+    if vote.vote_type == Vote.DISLIKE:
+        # Remove dislike
+        vote.delete()
+        game.dislikes = Vote.objects.filter(game=game, vote_type=Vote.DISLIKE).count()
+        game.save()
+        status = 'removed'
+    else:
+        # Set dislike, remove like if present
+        vote.vote_type = Vote.DISLIKE
+        vote.save()
+        game.likes = Vote.objects.filter(game=game, vote_type=Vote.LIKE).count()
+        game.dislikes = Vote.objects.filter(game=game, vote_type=Vote.DISLIKE).count()
+        game.save()
+        status = 'added'
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'likes': game.likes, 'dislikes': game.dislikes, 'status': status})
     return redirect("home")
