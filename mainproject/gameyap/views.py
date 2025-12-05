@@ -56,7 +56,9 @@ def game_create(request):
     if request.method == "POST":
         form = GameForm(request.POST)
         if form.is_valid():
-            form.save()
+            game = form.save(commit=False)
+            game.user = request.user
+            game.save()
             return redirect("home")
     else:
         form = GameForm()
@@ -65,6 +67,8 @@ def game_create(request):
 @login_required
 def game_update(request, pk):
     game = get_object_or_404(Game, pk=pk)
+    if game.user != request.user:
+        return redirect("home")
     if request.method == "POST":
         form = GameForm(request.POST, instance=game)
         if form.is_valid():
@@ -77,6 +81,8 @@ def game_update(request, pk):
 @login_required
 def game_delete(request, pk):
     game = get_object_or_404(Game, pk=pk)
+    if game.user != request.user:
+        return redirect("home")
     if request.method == "POST":
         game.is_active = False
         game.save()

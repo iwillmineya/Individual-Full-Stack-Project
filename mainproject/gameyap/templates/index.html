@@ -99,7 +99,7 @@
                                   <span>{{ game.description }}</span>
                               </p>
                               <div class="mt-auto">
-                                {% if user.is_authenticated %}
+                                {% if user.is_authenticated and user == game.user %}
                                   <a href="{% url 'game_update' game.pk %}" class="btn btn-outline-warning me-2 mb-2" aria-label="Edit {{ game.title }}">Edit</a>
                                   <a href="{% url 'game_delete' game.pk %}" class="btn btn-outline-danger mb-2" aria-label="Delete {{ game.title }}">Delete</a>
                                 {% endif %}
